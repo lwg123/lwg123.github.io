@@ -93,13 +93,23 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="lwg的空间">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="1、TCP/IPTCP/IP就是传输控制协议/网间协议，网络层的“ip地址”可以唯一标识网络中的主机，而传输层的“协议+端口”可以唯一标识主机中的应用程序（进程）下面说一下IP地址和端口号 IP地址IP地址用于唯一标识网络中的一个通信实体，这个通信实体既可以是一台主机，也可以是一台打印机，或者是路由器的某一个端口。在基于IP协议的网络中传输的数据包，都必须使用IP地址在进行标识。IP地址用于唯一标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket理解和使用">
+<meta property="og:url" content="http://yoursite.com/2017/07/14/Socket通信/index.html">
 <meta property="og:site_name" content="lwg的空间">
+<meta property="og:description" content="1、TCP/IPTCP/IP就是传输控制协议/网间协议，网络层的“ip地址”可以唯一标识网络中的主机，而传输层的“协议+端口”可以唯一标识主机中的应用程序（进程）下面说一下IP地址和端口号 IP地址IP地址用于唯一标识网络中的一个通信实体，这个通信实体既可以是一台主机，也可以是一台打印机，或者是路由器的某一个端口。在基于IP协议的网络中传输的数据包，都必须使用IP地址在进行标识。IP地址用于唯一标">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oqfs0y2cu.bkt.clouddn.com/17-7-14/40970466.jpg">
+<meta property="og:image" content="http://oqfs0y2cu.bkt.clouddn.com/17-7-14/31112059.jpg">
+<meta property="og:image" content="http://oqfs0y2cu.bkt.clouddn.com/17-7-14/85317428.jpg">
+<meta property="og:image" content="http://oqfs0y2cu.bkt.clouddn.com/17-7-15/79800101.jpg">
+<meta property="og:image" content="http://oqfs0y2cu.bkt.clouddn.com/17-7-15/49828972.jpg">
+<meta property="og:updated_time" content="2017-07-23T12:46:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lwg的空间">
+<meta name="twitter:title" content="Socket理解和使用">
+<meta name="twitter:description" content="1、TCP/IPTCP/IP就是传输控制协议/网间协议，网络层的“ip地址”可以唯一标识网络中的主机，而传输层的“协议+端口”可以唯一标识主机中的应用程序（进程）下面说一下IP地址和端口号 IP地址IP地址用于唯一标识网络中的一个通信实体，这个通信实体既可以是一台主机，也可以是一台打印机，或者是路由器的某一个端口。在基于IP协议的网络中传输的数据包，都必须使用IP地址在进行标识。IP地址用于唯一标">
+<meta name="twitter:image" content="http://oqfs0y2cu.bkt.clouddn.com/17-7-14/40970466.jpg">
 
 
 
@@ -127,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/14/Socket通信/"/>
 
 
 
 
 
-  <title>lwg的空间</title>
+  <title>Socket理解和使用 | lwg的空间</title>
   
 
 
@@ -158,9 +168,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -243,364 +251,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/First Topic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lwg123">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lwg的空间">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/23/First Topic/" itemprop="url">First Night</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T17:27:43+08:00">
-                2017-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>我有一头<strong>小毛驴</strong>，可是我从来都不骑。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/second/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lwg123">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lwg的空间">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/23/second/" itemprop="url">Second scheme</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T17:27:43+08:00">
-                2017-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>我有一头<strong>小毛驴</strong>，可是我从来都不骑。</p>
-<pre><code>//获取当前时间的时间戳
--(NSString *)getCurrentTimestamp{
-    NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
-    NSTimeInterval a = [dat timeIntervalSince1970] * 1000;
-    NSString *timeString = [NSString stringWithFormat:@&quot;%0.f&quot;, a];
-    return timeString;
-}
-</code></pre></blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="lwg123">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="lwg的空间">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/23/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T17:17:18+08:00">
-                2017-07-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
 
   
 
@@ -626,9 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/14/Socket通信/" itemprop="url">Socket理解和使用</a></h1>
+          <h1 class="post-title" itemprop="name headline">Socket理解和使用</h1>
         
 
         <div class="post-meta">
@@ -675,9 +326,7 @@
       
 
       
-        
-          
-            <h3 id="1、TCP-IP"><a href="#1、TCP-IP" class="headerlink" title="1、TCP/IP"></a>1、TCP/IP</h3><p>TCP/IP就是传输控制协议/网间协议，网络层的“ip地址”可以唯一标识网络中的主机，而传输层的“协议+端口”可以唯一标识主机中的应用程序（进程）<br>下面说一下IP地址和端口号</p>
+        <h3 id="1、TCP-IP"><a href="#1、TCP-IP" class="headerlink" title="1、TCP/IP"></a>1、TCP/IP</h3><p>TCP/IP就是传输控制协议/网间协议，网络层的“ip地址”可以唯一标识网络中的主机，而传输层的“协议+端口”可以唯一标识主机中的应用程序（进程）<br>下面说一下IP地址和端口号</p>
 <h4 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h4><p>IP地址用于唯一标识网络中的一个通信实体，这个通信实体既可以是一台主机，也可以是一台打印机，或者是路由器的某一个端口。在基于IP协议的网络中传输的数据包，都必须使用IP地址在进行标识。IP地址用于唯一标识网络上的一个通信实体，但一个通信实体可以有多个通信程序同时提供网络服务，此时还需要使用端口。</p>
 <h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><p>端口是一个16位的整数，用于表示数据交给哪个通信程序处理。一次端口就是应用程序与外界交流的出入口，它是一种抽象的软件结构，包括一些数据结构I/O(基本输入输出)缓冲区。不同的应用程序处理不同端口上的数据，同一台机器上不能有两个程序使用同一个端口，端口号从0到65535。<br>TCP/IP协议参考模型把所有的TCP/IP系列协议归类到四个抽象层中，<br>应用层：TFTP，HTTP，SNMP，FTP，SMTP，DNS，Telnet 等等<br>传输层：TCP，UDP<br>网络层：IP，ICMP，OSPF，EIGRP，IGMP<br>数据链路层：SLIP，CSLIP，PPP，MTU<br><img src="http://oqfs0y2cu.bkt.clouddn.com/17-7-14/40970466.jpg" alt=""></p>
 <h3 id="2、Socket"><a href="#2、Socket" class="headerlink" title="2、Socket"></a>2、Socket</h3><p>利用ip地址＋协议＋端口号唯一标示网络中的一个进程，就可以利用socket进行通信了，我们经常把socket翻译为套接字，socket是在应用层和传输层之间的一个抽象层，它把TCP/IP层复杂的操作抽象为几个简单的接口供应用层调用以实现进程在网络中通信。<br><img src="http://oqfs0y2cu.bkt.clouddn.com/17-7-14/31112059.jpg" alt=""></p>
@@ -707,20 +356,27 @@
 <p><img src="http://oqfs0y2cu.bkt.clouddn.com/17-7-15/49828972.jpg" alt=""><br>然后运行客户端输入聊天信息即可收到，如图所示</p>
 <p>详细代码和服务器端代码（SimpleServer.m）下载 <a href="https://github.com/lwg123/Socket_demo" target="_blank" rel="external">详细demo下载</a></p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
@@ -728,21 +384,38 @@
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/23/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -750,6 +423,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -770,8 +447,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -815,6 +501,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、TCP-IP"><span class="nav-number">1.</span> <span class="nav-text">1、TCP/IP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP地址"><span class="nav-number">1.1.</span> <span class="nav-text">IP地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口"><span class="nav-number">1.2.</span> <span class="nav-text">端口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Socket"><span class="nav-number">2.</span> <span class="nav-text">2、Socket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#socket通信流程"><span class="nav-number">2.1.</span> <span class="nav-text">socket通信流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#socket编程API"><span class="nav-number">2.2.</span> <span class="nav-text">socket编程API</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -928,10 +630,10 @@
   
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
-  
+
 
   
 
