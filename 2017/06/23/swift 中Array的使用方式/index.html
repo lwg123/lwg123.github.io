@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.尽量避免使用下标对于array[index]这样的访问，甚至都没有使用optional来保护越界的情况。 12let a = [1, 2, 3]  type(of: a[1]) // Int.type a[1]的类型是Int，而不是Optional，这说明什么呢？你必须小心翼翼的使用index来访问Array中的元素，一旦index的值不正确，你就需要承担运行崩溃的严重后果. 当我们想访问数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift中Array的使用方法">
+<meta property="og:url" content="http://yoursite.com/2017/06/23/swift 中Array的使用方式/index.html">
+<meta property="og:site_name" content="lwg的空间">
+<meta property="og:description" content="1.尽量避免使用下标对于array[index]这样的访问，甚至都没有使用optional来保护越界的情况。 12let a = [1, 2, 3]  type(of: a[1]) // Int.type a[1]的类型是Int，而不是Optional，这说明什么呢？你必须小心翼翼的使用index来访问Array中的元素，一旦index的值不正确，你就需要承担运行崩溃的严重后果. 当我们想访问数组">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-16T05:50:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift中Array的使用方法">
+<meta name="twitter:description" content="1.尽量避免使用下标对于array[index]这样的访问，甚至都没有使用optional来保护越界的情况。 12let a = [1, 2, 3]  type(of: a[1]) // Int.type a[1]的类型是Int，而不是Optional，这说明什么呢？你必须小心翼翼的使用index来访问Array中的元素，一旦index的值不正确，你就需要承担运行崩溃的严重后果. 当我们想访问数组">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/23/swift 中Array的使用方式/"/>
+
+
+
+
+
+  <title>swift中Array的使用方法 | lwg的空间</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">lwg的空间</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/23/swift 中Array的使用方式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lwg123">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwg的空间">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">swift中Array的使用方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-23T09:16:00+08:00">
+                2017-06-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-尽量避免使用下标"><a href="#1-尽量避免使用下标" class="headerlink" title="1.尽量避免使用下标"></a>1.尽量避免使用下标</h2><p>对于array[index]这样的访问，甚至都没有使用optional来保护越界的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">let a = [1, 2, 3]  </div><div class="line">type(of: a[1]) // Int.type</div></pre></td></tr></table></figure>
+<p>a[1]的类型是Int，而不是Optional<int>，这说明什么呢？你必须小心翼翼的使用index来访问Array中的元素，一旦index的值不正确，你就需要承担运行崩溃的严重后果.</int></p>
+<p>当我们想访问数组中的每一个元素时：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a.forEach &#123; print($0) &#125;</div><div class="line">// or</div><div class="line">for value in a &#123;&#125;</div></pre></td></tr></table></figure>
+<p>当我们要获得数组中每一个元素的索引和值时：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">for(index, value) in a.enumerated()&#123;&#125;</div></pre></td></tr></table></figure>
+<p>当我们要查找数组中元素的位置时（例如，查找等于1的元素的索引）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a.index &#123; $0 == 1 &#125;</div></pre></td></tr></table></figure>
+<p>index会返回一个Optional<int>，当要查找的元素存在时，就返回该元素的索引，否则，就返回nil</int></p>
+<p>当我们要过滤数组中的某些元素时（例如，去掉所有偶数）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a.filter &#123; $0 % 2 == 0 &#125;</div></pre></td></tr></table></figure>
+<p>访问数组中第一个和最后一个元素的first和last属性，当Array为空时，它们的值都是nil</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a.first // 1</div><div class="line">a.last  // 3</div><div class="line">type(of: a.first) // Optional&lt;Int&gt;.Type</div></pre></td></tr></table></figure>
+<p>Array末尾删除元素。Swift为这个动作提供了两个API:      </p>
+<ul>
+<li>removeLast，你需要自行确保数组中有元素，否则会引发运行时错误；</li>
+<li>popLast，如果数组为空，会返回nil；</li>
+</ul>
+<h2 id="2-通过closure参数化对数组元素的变形操作"><a href="#2-通过closure参数化对数组元素的变形操作" class="headerlink" title="2.通过closure参数化对数组元素的变形操作"></a>2.通过closure参数化对数组元素的变形操作</h2><h4 id="从循环到map"><a href="#从循环到map" class="headerlink" title="从循环到map"></a>从循环到map</h4><p>Fibonacci序列：[0, 1, 1, 2, 3, 5]。如果我们要计算每个元素的平方，怎么办呢？<br>除了使用for循环，看看下面的解决方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// [0, 1, 1, 4, 9, 25]</div><div class="line">let constSquares = fibonacci.map &#123; $0 * $0 &#125;</div></pre></td></tr></table></figure>
+<p>它比for循环更具表现力，并且也能把我们期望的结果定义成常量</p>
+<p>通过extension很简单的自己来实现map:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">extension Array &#123;</div><div class="line">    func myMap&lt;T&gt;(_ transform: (Element) -&gt; T) -&gt; [T] &#123;</div><div class="line">        var tmp: [T] = []</div><div class="line">        tmp.reserveCapacity(count)</div><div class="line"></div><div class="line">        for value in self &#123;</div><div class="line">            tmp.append(transform(value))</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return tmp</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">// [0, 1, 1, 4, 9, 25]</div><div class="line">let constSequence1 = fibonacci.myMap &#123; $0 * $0 &#125;</div></pre></td></tr></table></figure>
+<h3 id="参数化数组元素的执行动作"><a href="#参数化数组元素的执行动作" class="headerlink" title="参数化数组元素的执行动作"></a>参数化数组元素的执行动作</h3><p>swift中一些常见的操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">fibonacci.min() // 0</div><div class="line">fibonacci.max() // 5</div></pre></td></tr></table></figure>
+<p>首先，使用min和max很安全，因为当数组为空时，这两个方法将返回nil</p>
+<p>其次，过滤出满足特定条件的元素，我们只要通过参数指定筛选规则就好了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fibonacci.filter &#123; $0 % 2 == 0 &#125;</div></pre></td></tr></table></figure>
+<p>第三，比较数组相等或以特定元素开始。对这类操作，我们需要提供两个内容，一个是要比较的数组，另一个则是比较的规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// false</div><div class="line">fibonacci.elementsEqual([0, 1, 1], by: &#123; $0 == $1 &#125;)</div><div class="line">// true</div><div class="line">fibonacci.starts(with: [0, 1, 1], by: &#123; $0 == $1 &#125;)</div></pre></td></tr></table></figure>
+<p>第四，最原始的for循环的替代品:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fibonacci.forEach &#123; print($0) &#125;</div></pre></td></tr></table></figure>
+<p>要注意它和map的一个重要区别：forEach并不处理closure参数的返回值。因此它只适合用来对数组中的元素进行一些操作，而不能用来产生返回结果</p>
+<p>第五、对数组进行排序，这时，我们需要通过参数指定的是排序规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// [0, 1, 1, 2, 3, 5]</div><div class="line">fibonacci.sorted()</div><div class="line">// [5, 3, 2, 1, 1, 0]</div><div class="line">fibonacci.sorted(by: &gt;) (&gt;号代表 $0 &gt; $1)</div><div class="line"></div><div class="line">let pivot = fibonacci.partition(by: &#123; $0 &lt; 1 &#125;)</div><div class="line">fibonacci[0 ..&lt; pivot] // [1，1，2, 3, 5]</div><div class="line">fibonacci[pivot ..&lt; fibonacci.endIndex] // [0]</div></pre></td></tr></table></figure>
+<p>其中，sorted(by:)的用法是很直接的，它默认采用升序排列。同时，也允许我们通过by自定义排序规则</p>
+<p>而partition(by:)则会先对传递给它的数组进行重排，然后根据指定的条件在重排的结果中返回一个分界点位置。这个分界点分开的两部分中，前半部分的元素都不满足指定条件；后半部分都满足指定条件。而后，我们就可以使用range operator来访问这两个区间形成的Array对象</p>
+<p>第六，是把数组的所有内容，“合并”成某种形式的值，对这类操作，我们需要指定的，是合并前的初始值，以及“合并”的规则.<br>例如，我们计算fibnacci中所有元素的和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fibonacci.reduce(0, +) // 12</div></pre></td></tr></table></figure>
+<p>通过这些例子，你应该能感受到了，这些通过各种形式封装了遍历动作的方法，它们之中的任何一个，都比直接通过for循环实现具有更强的表现力。这些API，开始让我们的代码从面向机器的，转变成面向业务需求的.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/15/TCP连接与关闭及HTTP GCD/" rel="next" title="TCP正常建立与关闭详情">
+                <i class="fa fa-chevron-left"></i> TCP正常建立与关闭详情
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/30/发票查询总结/" rel="prev" title="发票查询小结">
+                发票查询小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="lwg123" />
+          <p class="site-author-name" itemprop="name">lwg123</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-尽量避免使用下标"><span class="nav-number">1.</span> <span class="nav-text">1.尽量避免使用下标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-通过closure参数化对数组元素的变形操作"><span class="nav-number">2.</span> <span class="nav-text">2.通过closure参数化对数组元素的变形操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从循环到map"><span class="nav-number">2.0.1.</span> <span class="nav-text">从循环到map</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数化数组元素的执行动作"><span class="nav-number">2.1.</span> <span class="nav-text">参数化数组元素的执行动作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lwg123</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
