@@ -264,6 +264,213 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/16/sqlite编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lwg123">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lwg的空间">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/16/sqlite编程/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T10:03:14+08:00">
+                2017-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<h2 id="title-ios的sqlite编程"><a href="#title-ios的sqlite编程" class="headerlink" title="title:ios的sqlite编程"></a>title:ios的sqlite编程</h2><h3 id="1-什么是SQLite？"><a href="#1-什么是SQLite？" class="headerlink" title="1.什么是SQLite？"></a>1.什么是SQLite？</h3><blockquote>
+<p>SQLite是一款轻型的嵌入式数据库，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了， 它的处理速度比Mysql、PostgreSQL这两款著名的数据库都还快。</p>
+</blockquote>
+<h3 id="2-数据库存储数据的步骤"><a href="#2-数据库存储数据的步骤" class="headerlink" title="2.数据库存储数据的步骤"></a>2.数据库存储数据的步骤</h3><blockquote>
+<p>1.新建数据库文件<br>2.新建一张表（table）<br>3.添加多个字段（column，列，属性）<br>4.添加多行记录（row，每行存放多个字段对应的值）</p>
+</blockquote>
+<h3 id="3-理论基础"><a href="#3-理论基础" class="headerlink" title="3.理论基础"></a>3.理论基础</h3><p>1.表格组成: 行(记录)和列(属性)  </p>
+<blockquote>
+<p>“属性” 是用来标识这一列应该存放什么<br>“记录” 是用来存放一条数据  </p>
+</blockquote>
+<p>2.属性类型</p>
+<blockquote>
+<p>blob 二进制类型<br>integer 整型<br>real浮点型<br>text文本类型<br>null 空</p>
+</blockquote>
+<p>3.主键</p>
+<blockquote>
+<p>主键（Primary Key，简称PK）用来唯一地标识某一条记录<br>主键可以是一个字段或多个字段<br>主键的设计原则:主键应当是对用户没有意义的,永远也不要更新主键,主键不应包含动态变化的数据,主键应当由计算机自动生成</p>
+</blockquote>
+<p>4.SQL中的常用关键字</p>
+<blockquote>
+<p>数据库中不可以使用关键字来命名表、字段<br>select、insert、update、delete、from、create、where、desc、order、by、group、table、alter、view、index等等</p>
+</blockquote>
+<p>5.SQL语句的种类</p>
+<blockquote>
+<p>数据定义语句（DDL：Data Definition Language）<br>包括create和drop, Alert等操作<br>在数据库中创建新表或删除表（create table或 drop table）</p>
+<p>数据操作语句（DML：Data Manipulation Language）<br>   包括insert、delete、update等操作<br>   上面的3种操作分别用于添加、修改、删除表中的数据</p>
+<p>数据查询语句（DQL：Data Query Language）<br>   可以用于查询获得表中的数据<br>   关键字select是DQL（也是所有SQL）用得最多的操作<br>   其他DQL常用的关键字有where，order by，group by和having</p>
+</blockquote>
+<p>6.补充资料 <a href="http://www.phpstudy.net/e/sql/sql_intro.html" target="_blank" rel="external">http://www.phpstudy.net/e/sql/sql_intro.html</a></p>
+<h3 id="4-DDL语句"><a href="#4-DDL语句" class="headerlink" title="4.DDL语句"></a>4.DDL语句</h3><p>1.新建和打开数据库</p>
+<blockquote>
+<p>sqlite3_open(filePath, &amp;database);</p>
+</blockquote>
+<p>2.创建table</p>
+<blockquote>
+<p>create table 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;<br>示例<br>create table if not exists t_student (id integer, name text, age inetger, score real) ;<br>说明：实际上SQLite是无类型的<br>    就算声明为integer类型，还是能存储字符串文本（主键除外）<br>    建表时声明啥类型或者不声明类型都可以，也就意味着创表语句可以这么写：<br>    create table t_student(name, age);<br>    为了保持良好的编程规范、方便程序员之间的交流，编写建表语句的时候最好加上每个字段的具体类型。</p>
+</blockquote>
+<p>3.删表  </p>
+<blockquote>
+<p>drop table if exists 表名 ;  </p>
+</blockquote>
+<p>4.修改表</p>
+<blockquote>
+<p>修改表名<br>ALTER TABLE 旧表名 RENAME TO 新表名<br>新增属性<br>   ALTER TABLE 表名 ADD COLUMN 列名 数据类型 限定符</p>
+</blockquote>
+<h3 id="5-给字段添加约束"><a href="#5-给字段添加约束" class="headerlink" title="5.给字段添加约束"></a>5.给字段添加约束</h3><blockquote>
+<p>简单约束<br>  不能为空<br>   not null ：规定字段的值不能为null<br>  不能重复<br>   unique ：规定字段的值必须唯一<br>  默认值<br>   default ：指定字段的默认值<br>  示例<br>   create table t_student (id integer, name text not null unique, age integer not null default 1) ;<br>   name字段不能为null，并且唯一<br>   age字段不能为null，并且默认为1</p>
+<p>主键约束<br>  添加主键约束的原因?<br>   如果t_student表中就name和age两个字段，而且有些记录的name和age字段的值都一样时，那么就没法区分这些数据，造成数据库的记录不唯一，这样就不方便管理数据<br>   良好的数据库编程规范应该要保证每条记录的唯一性，为此，增加了主键约束<br>   也就是说，每张表都必须有一个主键，用来标识记录的唯一性<br>   在创表的时候用primary key声明一个主键<br>   如果想要让主键自动增长（必须是integer类型），应该增加autoincrement</p>
+</blockquote>
+<pre><code>create table t_student (id integer primary key autoincrement, name text, age integer) ;
+</code></pre><h3 id="6-DML语句"><a href="#6-DML语句" class="headerlink" title="6.DML语句"></a>6.DML语句</h3><p>1.插入数据（insert）</p>
+<blockquote>
+<p>格式<br>   insert into 表名 (字段1, 字段2, …) values (字段1的值, 字段2的值, …) ;<br>  示例<br>   insert into t_student (name, age) values (‘sz’, 10) ;<br>  注意<br>   数据库中的字符串内容应该用单引号 ’ 括住  </p>
+</blockquote>
+<p>2.更新数据（update）</p>
+<blockquote>
+<p>格式<br>   update 表名 set 字段1 = 字段1的值, 字段2 = 字段2的值, … ;<br>  示例<br>   update t_student set name = ‘wex’, age = 20 ;<br>  注意<br>   上面的示例会将t_student表中所有记录的name都改为wex，age都改为20</p>
+</blockquote>
+<p>3.删除数据（delete）</p>
+<blockquote>
+<p>格式<br>   delete from 表名 ;<br>  示例<br>   delete from t_student ;<br>  注意<br>   上面的示例会将t_student表中所有记录都删掉</p>
+</blockquote>
+<h3 id="7-条件语句"><a href="#7-条件语句" class="headerlink" title="7.条件语句"></a>7.条件语句</h3><p>作用:<br>  如果只想更新或者删除某些固定的记录，那就必须在DML语句后加上一些条件<br> 条件语句的常见格式</p>
+<blockquote>
+<p>where 字段 = 某个值 ; // 不能用两个 =<br>  where 字段 is 某个值 ; // is 相当于 =<br>  where 字段 != 某个值 ;<br>  where 字段 is not 某个值 ; // is not 相当于 !=<br>  where 字段 &gt; 某个值 ;<br>  where 字段1 = 某个值 and 字段2 &gt; 某个值 ; // and相当于C语言中的 &amp;&amp;<br>  where 字段1 = 某个值 or 字段2 = 某个值 ; // or 相当于C语言中的 ||<br>  示例：<br>  将t_student表中年龄大于10 并且 姓名不等于wex的记录，年龄都改为 5<br>update t_student set age = 5 where age &gt; 10 and name != ‘wex’ ;<br>   删除t_student表中年龄小于等于10 或者 年龄大于30的记录<br>delete from t_student where age &lt;= 10 or age &gt; 30 ;</p>
+</blockquote>
+<h3 id="8-DQL语句"><a href="#8-DQL语句" class="headerlink" title="8.DQL语句"></a>8.DQL语句</h3><blockquote>
+<p>格式<br>  select 字段1, 字段2, … from 表名 ;<br>  select <em> from 表名; // 查询所有的字段<br> 示例<br>  select name, age from t_student ;<br>  select </em> from t_student ;<br>  select * from t_student where age &gt; 10 ; // 条件查询</p>
+</blockquote>
+<h3 id="9-代码实现DML语句-Insert绑定参数"><a href="#9-代码实现DML语句-Insert绑定参数" class="headerlink" title="9.代码实现DML语句-Insert绑定参数"></a>9.代码实现DML语句-Insert绑定参数</h3><blockquote>
+<p>准备语句（prepared statement）对象代表一个简单SQL语句对象的实例，这个对象通常被称为“准备语句”或者“编译好的SQL语句”或者就直接称为“语句”。</p>
+<p>操作历程  </p>
+<ol>
+<li>使用sqlite3_prepare_v2或相关的函数创建这个对象<br>如果执行成功，则返回SQLITE_OK，否则返回一个错误码  <ol>
+<li>使用sqlite3<em>bind</em>*()给宿主参数（host parameters）绑定值<br>sqlite3_bind_text<br>参数1: 准备语句<br>参数2:绑定的参数索引 (从1开始)<br>参数3:绑定的参数内容<br>参数4:绑定的参数长度 (-1代表自动计算长度)<br>参数5:参数的处理方式<br>SQLITE_TRANSIENT 会对字符串做一个 copy，SQLite 选择合适的机会释放<br>SQLITE_STATIC / nil 把它当做全局静态变量, 不会字符串做任何处理，如果字符串被释放，保存到数据库的内容可能不正确！  <ol>
+<li>通过调用sqlite3_step() 一次或多次来执行这个sql<br>对于DML语句, 如果执行成功, 返回SQLITE_DONE<br>对于DQL语句, 通过多次执行获取结果集, 继续执行的条件是返回值 SQLITE_ROW  </li>
+</ol>
+</li>
+<li>使用sqlite3_reset()重置这个语句，然后回到第2步，这个过程做0次或多次  </li>
+</ol>
+</li>
+<li>使用sqlite3_finalize()销毁这个对象, 防止内存泄露</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">const char *insertSQL = &quot;insert into word_inf values(null,?,?)&quot;;</div><div class="line">sqlite3_stmt *stmt;</div><div class="line">//预编译SQL语句，stmt变量保存了预编译结果的指针</div><div class="line"> int insertReasult = sqlite3_prepare_v2(database, insertSQL, -1, &amp;stmt, NULL);</div><div class="line"> //如果预编译成功</div><div class="line"> if (insertReasult == SQLITE_OK) &#123;</div><div class="line">     // 为第一个？占位符绑定参数</div><div class="line">   sqlite3_bind_text(stmt, 1, [word UTF8String], -1, NULL);</div><div class="line">   // 为第二个？占位符绑定参数</div><div class="line">   sqlite3_bind_text(stmt, 2, [detail UTF8String], -1, NULL);</div><div class="line">   // 执行SQL语句</div><div class="line">    sqlite3_step(stmt);</div><div class="line">  &#125;</div><div class="line">sqlite3_finalize(stmt);</div></pre></td></tr></table></figure>
+<h3 id="10-代码实现DQL语句"><a href="#10-代码实现DQL语句" class="headerlink" title="10.代码实现DQL语句"></a>10.代码实现DQL语句</h3><p>实现查询到的数据转化为OC对象，并存储在数组中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> sqlite3 *database;</div><div class="line"> sqlite3_open([[self dbPath] UTF8String], &amp;database);</div><div class="line">const char *selectSQL = &quot;select * from word_inf where word like ?&quot;;</div><div class="line">sqlite3_stmt *stmt;</div><div class="line">        </div><div class="line">int queryReasult = sqlite3_prepare_v2(database, selectSQL, -1, &amp;stmt, NULL);</div><div class="line">NSMutableArray *result = [NSMutableArray array];</div><div class="line">if (queryReasult == SQLITE_OK) &#123;</div><div class="line">     // 为第一个？占位符绑定参数</div><div class="line">    sqlite3_bind_text(stmt, 1, [[NSString stringWithFormat:@&quot;%%%@%%&quot;,key] UTF8String], -1, NULL);</div><div class="line">// 采用循环多次执行sqlite3_step()函数，并从中取出查询结果</div><div class="line">   while (sqlite3_step(stmt) == SQLITE_ROW) &#123;</div><div class="line">    // 分别获取当前行的不同列的查询数据</div><div class="line">    int word_id = sqlite3_column_int(stmt, 0);</div><div class="line">    char *word = (char *)sqlite3_column_text(stmt, 1);</div><div class="line">  char *detail = (char *)sqlite3_column_text(stmt, 2);</div><div class="line">  FKWord *fkWord = [[FKWord alloc] initWithId:word_id word:[NSString stringWithUTF8String:word] detail:[NSString stringWithUTF8String:detail]];</div><div class="line">   [result addObject:fkWord];</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h3 id="11-代码实现-事务"><a href="#11-代码实现-事务" class="headerlink" title="11.代码实现-事务"></a>11.代码实现-事务</h3><blockquote>
+<p>概念</p>
+</blockquote>
+<p>  事务（Transaction）是并发控制的单位，是用户定义的一个操作序列。这些操作要么都做，要么都不做，是一个不可分割的工作单位。通过事务，可以将逻辑相关的一组操作绑定在一起，保持数据的完整性。</p>
+<p>  事务通常是以BEGIN TRANSACTION开始，以COMMIT TRANSACTION或ROLLBACK TRANSACTION结束。</p>
+<p>   COMMIT表示提交，即提交事务的所有操作。具体地说就是将事务中所有对数据库的更新写回到磁盘上的物理数据库中去，事务正常结束。</p>
+<p>   ROLLBACK表示回滚，即在事务运行的过程中发生了某种故障，事务不能继续进行，系统将事务中对数据库的所有已完成的操作全部撤消，滚回到事务开始的状态。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">修改两条记录, 一个成功, 一个失败测试</div><div class="line"></div><div class="line">   XMGSQLTool.shareInstance.beginTransaction()</div><div class="line"></div><div class="line">   let result1 = Student.updateStudent(&quot;score = score - 10&quot;, condition: &quot;name = &apos;zs&apos;&quot;)</div><div class="line"></div><div class="line">   let result2 = Student.updateStudent(&quot;score1 = score + 10&quot;, condition: &quot;name = &apos;wex&apos;&quot;)</div><div class="line"></div><div class="line">   // 如果都执行成功再提交, 如果都不成功, 那就回滚</div><div class="line">if result1 &amp;&amp; result2</div><div class="line"> &#123;</div><div class="line">    XMGSQLTool.shareInstance.commitTransaction()</div><div class="line"> &#125;else</div><div class="line"> &#123;</div><div class="line">  XMGSQLTool.shareInstance.rollBackTransaction()</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/ios数据存储/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -824,7 +1031,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
